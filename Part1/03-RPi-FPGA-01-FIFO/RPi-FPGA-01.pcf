@@ -1,0 +1,46 @@
+set_io frame_done_in 101
+set_io frame 88
+set_io r_en_in 87
+set_io ext_reset_n 98
+set_io d[0] 79
+set_io d[1] 78
+set_io d[2] 107
+set_io d[3] 106
+set_io d[4] 105
+set_io d[5] 76
+set_io d[6] 75
+set_io d[7] 80
+set_io d[8] 82 
+set_io d[9] 83
+set_io d[10] 84
+set_io d[11] 81
+set_io d[12] 74
+set_io d[13] 73
+set_io d[14] 104
+set_io d[15] 102
+
+set_io clk_100mhz 49
+
+set_io led1 115
+set_io led2 116
+set_io led3 117
+set_io led4 118
+
+set_io B1  61
+set_io B2  62
+set_io B3  56
+set_io B4  60
+set_io B5  55
+set_io B6  52
+set_io B7  48
+set_io B8  47
+
+set_io A1  45
+set_io A2  44
+set_io A3  43
+set_io A4  42 
+set_io A5  41
+set_io A6  39
+set_io A7  38
+set_io A8  37
+set_io A9  34

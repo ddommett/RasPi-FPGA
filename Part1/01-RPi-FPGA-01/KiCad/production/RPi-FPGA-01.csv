@@ -1,0 +1,18 @@
+Comment,Designator,Footprint,LCSC Part #
+10uF Unpolarized capacitor,"C1,C8,C10,C23",C_0805_2012Metric,C17024
+4.7uF Unpolarized capacitor,"C2,C3,C12",C_0402_1005Metric,C307423
+.1uF Unpolarized capacitor,"C4,C5,C6,C7,C15,C16,C17,C18,C19,C20,C21,C22",C_0402_1005Metric,C880603
+"BAT54AW Dual schottky barrier diode, common anode, SOT-323",D1,SOT-323_SC-70,C22466374
+LED-RED Light emitting diode,"D2,D3,D4,D5",LED_0603_1608Metric,C2286
+LED Light emitting diode,"D6,D7",LED_0603_1608Metric,C12624
+470nH Inductor,L1,XFL4015-471,C18221164
+"470 Resistor, US symbol","R1,R5,R6,R7,R10,R11",R_0402_1005Metric,C25117
+"100 Resistor, US symbol","R2,R3",R_0402_1005Metric,C25076
+"10K Resistor, US symbol","R4,R12,R13,R14,R15,R40,R41,R42,R43,R44,R45",R_0402_1005Metric,C25744
+"453K Resistor, US symbol",R8,R_0402_1005Metric,C27009
+"100K Resistor, US symbol",R9,R_0402_1005Metric,C25530
+~ ,U1,TQFP-144_20x20mm_P0.5mm,C1521989
+"TPS62821DLC 1A Step-Down Converter with DCS-Control, adjustable output, 2.4-5.5V input voltage, QFN-8",U2,Texas_VSON-HR-8_1.5x2mm_P0.5mm,C469860
+"MCP1700T-1202E/TT 250mA Low Quiscent Current LDO, 1.2V output, SOT-23",U10,SOT-23,C144202
+O93225100MEDA4SI-13 ,U11,SMD3225,C496694
+IS25LP064D-JBLE ,U12,SO-8_5.3x6.2mm_P1.27mm,C4943337

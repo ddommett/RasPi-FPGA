@@ -1,0 +1,44 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "brcm,bcm2711";
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			fast_overlay_bus {
+				compatible = "fast_gpio_bus,fast_gpio_bus";
+				status = "okay";
+				desc = "Fast gpio bus, read 16 bits";
+				version = <1>;
+				d0-gpio =  <&gpio 0 0>; 
+				d1-gpio =  <&gpio 1 0>; 
+				d2-gpio =  <&gpio 2 0>; 
+				d3-gpio =  <&gpio 3 0>; 
+				d4-gpio =  <&gpio 4 0>; 
+				d5-gpio =  <&gpio 5 0>; 
+				d6-gpio =  <&gpio 6 0>; 
+				d7-gpio =  <&gpio 7 0>; 
+				d8-gpio =  <&gpio 8 0>; 
+				d9-gpio =  <&gpio 9 0>; 
+				d10-gpio = <&gpio 10 0>; 
+				d11-gpio = <&gpio 11 0>; 
+				d12-gpio = <&gpio 12 0>; 
+				d13-gpio = <&gpio 13 0>; 
+				d14-gpio = <&gpio 14 0>; 
+				d15-gpio = <&gpio 15 0>; 
+				cfg-si-gpio =     <&gpio 16 0>; 
+				frame_done-gpio = <&gpio 17 0>; 
+				unused-18-gpio =  <&gpio 18 0>; 
+				cgf-sck-gpio =    <&gpio 19 0>; 
+				spi1-mosi-gpio =  <&gpio 20 0>; 
+				cfg-so-gpio =     <&gpio 21 0>; 
+				r-en-gpio =       <&gpio 22 0>; 
+				frame-gpio =      <&gpio 23 0>; 
+				cfg-rst-gpio =    <&gpio 24 0>; 
+				cfg-ss-gpio =     <&gpio 25 0>; 
+				cfg-done-gpio =   <&gpio 26 0>; 
+				ext-reset-n-gpio = <&gpio 27 0>; 
+			};
+		};
+	};
+};
