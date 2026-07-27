@@ -1,0 +1,44 @@
+#!
+
+# Check devices list - should see "rp1-cfe"
+v4l2-ctl --list-devices
+
+# Load the EDID data for Debian 13 (Trixie)
+v4l2-ctl -d /dev/v4l-subdev-tc358743 --set-edid=file=./720p60edid.txt
+
+# Important to give it time to sync
+sleep 2 
+
+# Query the current HDMI signal source information - IT MUST NOT BE ZERO!
+# Apply the screen timing to the capture setup
+v4l2-ctl -d /dev/v4l-subdev-tc358743 --query-dv-timings 
+v4l2-ctl -d /dev/v4l-subdev-tc358743 --set-dv-bt-timings query
+
+# Initialize/reset the media - 0 COULD CHANGE!
+media-ctl -d /dev/media-rp1-cfe -r 
+
+# Disable pisp-fe interface
+media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'pisp-fe':0 [0]" 
+
+# Connect CSI2's pad4 to rp1-cfe-csi2_ch0's pad0. 
+media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'rp1-cfe-csi2_ch0':0 [1]"
+
+# Configure the media node. 
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:BGR888_1X24/1280x720 field:none]" 
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:BGR888_1X24/1280x720 field:none]"
+
+# Set output formats
+v4l2-ctl -v width=1280,height=720,pixelformat=BGR3
+
+# Capture frames and save a file
+v4l2-ctl --verbose -d /dev/video-rp1-cfe-csi2_ch0 --set-fmt-video=width=1280,height=720,pixelformat=BGR3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
+
+# Play the video
+#ffplay -f rawvideo -video_size 1280x720 -pixel_format bgr24 csitest.bgr
+
+# Play live
+#ffplay -f v4l2 -input_format bgr24 -video_size 1280x720 -framerate 60 -i /dev/video-rp1-cfe-csi2_ch0
+
+
+
+

@@ -1,0 +1,31 @@
+# A suggestion to create static symlinks to the correct devices on boot, using udev rules. This way you can hardcode them in software without having to run detection logic everytime:
+
+# Create file /etc/udev/rules.d/80-video.rules with the below contents and reboot. Then you should be able to access the correct media device using /dev/media-rp1-cfe, the TC358743 subdev using /dev/v4l-subdev-tc358743 and the video device using /dev/video-rp1-cfe-csi2_ch0:
+
+# /etc/udev/rules.d/80-video.rules:
+
+#    Create fixed & identifiable symlinks for the Geekworm X1301 HDMI to CSI-2
+#    bridge interface. In this case, we want:
+#    1. The media node corresponding to the raspi5 Camera Front End
+#    2. The subdev node corresponding to the tc358743 chip (HDMI-to-CSI-2 bridge)
+#    3. The first CSI (camera serial interface) capture device node of the raspi5
+#    (rp1-cfe-csi2_ch0)
+#
+#    To re-trigger udev rules after changes:
+# sudo udevadm control --reload-rules
+# sudo udevadm trigger
+#
+# Setting Persistent V4L2 ConfigurationsBecause raw v4l2-ctl camera settings do not persist after disconnection, 
+# you can chain a v4l2-ctl command right into your udev rule.
+# For example, to set exposure and focus every time the camera is plugged in:
+# SUBSYSTEM=="video4linux", KERNEL=="video*", ATTR{name}=="rp1-cfe-csi2_ch0", KERNELS=="1f00128000.csi", DRIVERS=="rp1-cfe", SYMLINK+="video-rp1-cfe-csi2_ch0" RUN+="/usr/bin/v4l2-ctl -d /dev/%k --set-ctrl=exposure_auto=1,focus_absolute=100"
+#
+# Can use commands like:
+#
+# udevadm info -a /dev/video0
+#
+# to get all attributes about a device
+
+SUBSYSTEM=="media", KERNEL=="media*", ATTR{model}=="rp1-cfe", KERNELS=="1f00128000.csi", DRIVERS=="rp1-cfe", SYMLINK+="media-rp1-cfe" 
+SUBSYSTEM=="video4linux", KERNEL=="v4l-subdev*", ATTR{name}=="tc358743 11-000f", KERNELS=="11-000f", SUBSYSTEMS=="i2c", DRIVERS=="tc358743", SYMLINK+="v4l-subdev-tc358743" 
+SUBSYSTEM=="video4linux", KERNEL=="video*", ATTR{name}=="rp1-cfe-csi2_ch0", KERNELS=="1f00128000.csi", DRIVERS=="rp1-cfe", SYMLINK+="video-rp1-cfe-csi2_ch0" 
