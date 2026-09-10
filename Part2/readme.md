@@ -41,10 +41,10 @@ cd build
 cmake -DMAKE_INSTALL_PREFIX="/usr" ../
 make
 sudo make install
-cd ..
+cd ../..
 ```
 
-Download latest oss-cad-suite-linux-arm64... from github.com/YosysHQ/yosys/oss-cad-suite-build/releases
+Download latest oss-cad-suite-linux-arm64... from github.com/YosysHQ/oss-cad-suite-build/releases
 
 Unpack Oss-Cad-Suite:
 
@@ -58,8 +58,6 @@ Set environment with, and add to .bashrc (REPLACE '/home/d' with the correct pat
 export PATH="/home/d/oss-cad-suite/bin:$PATH"
 sed -i '$a\export PATH="/home/d/oss-cad-suite/bin:$PATH" ' ~/.bashrc 
 ```
-
-Reboot!
 
 ### Specify Linux OS Overlays
 
