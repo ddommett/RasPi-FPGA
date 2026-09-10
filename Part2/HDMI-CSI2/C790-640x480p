@@ -24,14 +24,16 @@ media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'pisp-fe':0 [0]"
 media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'rp1-cfe-csi2_ch0':0 [1]"
 
 # Configure the media node. 
-media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:BGR888_1X24/640x480 field:none]" 
-media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:BGR888_1X24/640x480 field:none]"
+media-ctl -d /dev/media-rp1-cfe -V '"tc358743 11-000f":0 [fmt:RGB888_1X24/640x480]'
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:RGB888_1X24/640x480 field:none colorspace:smpte170m]" 
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:RGB888_1X24/640x480 field:none colorspace:smpte170m]"
 
 # Set output formats
-v4l2-ctl -v width=640,height=480,pixelformat=BGR3
+v4l2-ctl -v width=640,height=480,pixelformat=RGB3
 
 # Capture frames and save a file
-v4l2-ctl --verbose -d /dev/video-rp1-cfe-csi2_ch0 --set-fmt-video=width=640,height=480,pixelformat=BGR3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
+v4l2-ctl -d /dev/video0 --stream-mmap=4 --stream-count=30 --stream-to=/dev/null
+#v4l2-ctl --verbose -d /dev/video-rp1-cfe-csi2_ch0 --set-fmt-video=width=640,height=480,pixelformat=BGR3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
 
 # Play the video
 #ffplay -f rawvideo -video_size 640x480 -pixel_format bgr24 csitest.bgr
