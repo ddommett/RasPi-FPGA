@@ -4,6 +4,8 @@ In this [LINK](./HDMI2CSI-Start.md), I provide a very quick method to capture vi
 
 Connecting a C790 is NOT plug-n-play, the user is required to enter a number of commands and have knowledge of the intended input resolution. The C790 is an HDMI-to-CSI bridge, not a native camera. It is not accessible through libcamera and therefore the common "rpicam-apps" available in the OS for a Pi 5 cannot be used. Instead, we must use Video4Linux2 (v4l2).
 
+(This was performed with Raspberry Pi OS released on 18 Jun 2026, 64-bit, kernel version 6.18, Debian version 13 (trixie).)
+
 ## Support
 
 The official support documentation for the C790 is at [wiki.geekworm.com/X1300_Software](wiki.geekworm.com/X1300_Software). I was largely successful by following that guidance with a few tweaks. 
