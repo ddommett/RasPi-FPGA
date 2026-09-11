@@ -36,10 +36,10 @@ v4l2-ctl -d /dev/video0 --stream-mmap=4 --stream-count=30 --stream-to=/dev/null
 #v4l2-ctl --verbose -d /dev/video-rp1-cfe-csi2_ch0 --set-fmt-video=width=640,height=480,pixelformat=BGR3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
 
 # Play the video
-#ffplay -f rawvideo -video_size 640x480 -pixel_format bgr24 csitest.bgr
+#ffplay -f rawvideo -video_size 640x480 -pixel_format rgb24 csitest.bgr
 
 # Play live
-#ffplay -f v4l2 -input_format bgr24 -video_size 640x480 -framerate 60 -i /dev/video-rp1-cfe-csi2_ch0
+#ffplay -f v4l2 -input_format rgb24 -video_size 640x480 -framerate 60 -i /dev/video-rp1-cfe-csi2_ch0
 
 
 
