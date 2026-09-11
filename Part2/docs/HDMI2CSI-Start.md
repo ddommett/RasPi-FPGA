@@ -8,6 +8,8 @@ I decided to use the [Geekworm C790 HDMI-to-CSI2](https://geekworm.com/products/
 
 This [LINK](./HDMI2CSI.md) provides a long explanation of the commands in the scripts and what they do.
 
+(This was performed with Raspberry Pi OS released on 18 Jun 2026, 64-bit, kernel version 6.18, Debian version 13 (trixie).)
+
 ## Connect the C790
 
 With power off, connect the C790 to CAM/DISP1 on the Pi 5 (the camera connector closest to the HDMI connectors). Then connect a video source to the HDMI connector on the C790. (I used a Commodore 64 Ultimate, which was outputting a 720p HDMI resolution.) Boot the Pi 5.
@@ -60,7 +62,7 @@ You MUST have a source 1280x720p video input BEFORE actually running the script,
 Again, the video source MUST be connected before trying the following.
 
 ```
-ffplay -f v4l2 -input_format bgr24 -video_size 1280x720 -framerate 60 -i /dev/video0
+ffplay -f v4l2 -input_format rgb24 -video_size 1280x720 -framerate 60 -i /dev/video0
 ```
 
 <div align="center">
@@ -90,7 +92,7 @@ You MUST have a source 640x480 video input BEFORE actually running the script, s
 Again, the video source MUST be connected before trying the following. (I used a Commodore 64 Ultimate, which was outputting a 640x480p HDMI resolution.) The next section [Icepi-Zero-HDMI-640x480](./Icepi-Zero-HDMI-640x480.md) talks about using the Icepi Zero FPGA to generate a 640x480 HDMI signal, so if you don't have a source of 640x480 HDMI, go to the next section and configure the Icepi Zero, then come back here and run the above C790-640x480p script followed by the following ffplay command.
 
 ```
-ffplay -f v4l2 -input_format bgr24 -video_size 640x480 -framerate 60 -i /dev/video0
+ffplay -f v4l2 -input_format rgb24 -video_size 640x480 -framerate 60 -i /dev/video0
 ```
 
 <div align="center">
