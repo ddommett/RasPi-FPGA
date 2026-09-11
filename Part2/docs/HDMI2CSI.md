@@ -132,16 +132,17 @@ media-ctl -d /dev/media1 --links "'csi2':4 -> 'rp1-cfe-csi2_ch0':0 [1]"
 Configure the resolution and format on the media device:
 
 ```
-media-ctl -d /dev/media1 -V "'csi2':0 [fmt:BGR888_1X24/1280x720 field:none]" 
-media-ctl -d /dev/media1 -V "'csi2':4 [fmt:BGR888_1X24/1280x720 field:none]"
+media-ctl -d /dev/media-rp1-cfe -V '"tc358743 11-000f":0 [fmt:RGB888_1X24/640x480]'
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]" 
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]"
 ```
 
-(My video input from the C64 Ultra is 1280 pixels horizontally by 720 lines vertically, and the format is BGR not RGB.)
+(My video input from the C64 Ultra is 1280 pixels horizontally by 720 lines vertically.)
 
 Set output format and resolution in v4l2:
 
 ```
-v4l2-ctl -v width=1280,height=720,pixelformat=BGR3
+v4l2-ctl -v width=1280,height=720,pixelformat=RGB3
 ```
 
 Finally, we are ready to capture some video. 
@@ -149,11 +150,11 @@ Finally, we are ready to capture some video.
 Firstly, let's capture video to a file and play it back with ffplay:
 
 ```
-v4l2-ctl --verbose -d /dev/video0 --set-fmt-video=width=1280,height=720,pixelformat=BGR3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
+v4l2-ctl --verbose -d /dev/video0 --set-fmt-video=width=1280,height=720,pixelformat=RGB3 --stream-mmap=4 --stream-skip=3 --stream-count=2 --stream-to=csitest.bgr --stream-poll
 ```
 
 ```
-ffplay -f rawvideo -video_size 1280x720 -pixel_format bgr24 csitest.bgr
+ffplay -f rawvideo -video_size 1280x720 -pixel_format rgb24 csitest.bgr
 ```
 
 <div align="center">
@@ -167,7 +168,7 @@ Success! (It's only two frames of video.)
 Secondly, let's just use ffplay for live video:
 
 ```
-ffplay -f v4l2 -input_format bgr24 -video_size 1280x720 -framerate 60 -i /dev/video0
+ffplay -f v4l2 -input_format rgb24 -video_size 1280x720 -framerate 60 -i /dev/video0
 ```
 
 When live, the cursor blinks!
@@ -184,9 +185,10 @@ v4l2-ctl -d /dev/v4l-subdev2 --set-dv-bt-timings query
 media-ctl -d /dev/media1 -r 
 media-ctl -d /dev/media1 --links "'csi2':4 -> 'pisp-fe':0 [0]" 
 media-ctl -d /dev/media1 --links "'csi2':4 -> 'rp1-cfe-csi2_ch0':0 [1]"
-media-ctl -d /dev/media1 -V "'csi2':0 [fmt:BGR888_1X24/1280x720 field:none]" 
-media-ctl -d /dev/media1 -V "'csi2':4 [fmt:BGR888_1X24/1280x720 field:none]"
-v4l2-ctl -v width=1280,height=720,pixelformat=BGR3
+media-ctl -d /dev/media1 -V '"tc358743 11-000f":0 [fmt:RGB888_1X24/640x480]'
+media-ctl -d /dev/media1 -V "'csi2':0 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]" 
+media-ctl -d /dev/media1 -V "'csi2':4 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]"
+4l2-ctl -v width=1280,height=720,pixelformat=RGB3
 ```
 
 To save typing all these commands every time the Pi 5 is rebooted, it is possible to put all the commands into a script, and then just run that script.
@@ -231,9 +233,10 @@ v4l2-ctl -d /dev/v4l-subdev-tc358743 --set-dv-bt-timings query
 media-ctl -d /dev/media-rp1-cfe -r 
 media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'pisp-fe':0 [0]" 
 media-ctl -d /dev/media-rp1-cfe --links "'csi2':4 -> 'rp1-cfe-csi2_ch0':0 [1]"
-media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:BGR888_1X24/1280x720 field:none]" 
-media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:BGR888_1X24/1280x720 field:none]"
-v4l2-ctl -v width=1280,height=720,pixelformat=BGR3
+media-ctl -d /dev/media-rp1-cfe -V '"tc358743 11-000f":0 [fmt:RGB888_1X24/640x480]'
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':0 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]" 
+media-ctl -d /dev/media-rp1-cfe -V "'csi2':4 [fmt:RGB888_1X24/1280x720 field:none colorspace:smpte170m]"
+v4l2-ctl -v width=1280,height=720,pixelformat=RGB3
 ```
 
 Now there is no need to use 'v4l2-ctl --list-devices' either manually or in a script.
