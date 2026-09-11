@@ -12,6 +12,8 @@ Complete documentation of the rationale, experiments, and projects, is in the [d
 
 Use the [Icepi Zero](https://github.com/cheyao/icepi-zero), with a Lattice ECP5 FPGA, and [Geekworm C790 HDMI-to-CSI2](https://geekworm.com/products/c790?) to feed data from a FPGA at a high data rate into a Raspberry Pi 5.
 
+(This was performed with Raspberry Pi OS released on 18 Jun 2026, 64-bit, kernel version 6.18, Debian version 13 (trixie).)
+
 ### Obtain Icepi Zero and C790, Connect them to a Raspberry Pi 5
 
 <div align="center">
