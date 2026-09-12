@@ -110,7 +110,7 @@ The following image shows all processes running and there are no errors in the c
 
 <div align="center">
   <a href="https://github.com/ddommett/RasPi_FPGA2">
-    <img src="../images/jellyfish.png" alt="CPU and GPU Test with Capture." width="543" >
+    <img src="../images/jellyfish.png" alt="CPU and GPU Test with Capture." width="700" >
   </a>
 </div>
 
