@@ -76,6 +76,46 @@ Note that the C app is running in userspace (not kernel space), has no special p
 
 THIS RAN FOR 46 HOURS WITHOUT A SINGLE ERROR!
 
+## Stress Test CPU and GPU
+
+Sysbench and glmark2 were installed:
+
+```
+sudo apt install -y sysbench glmark2
+```
+
+To perform the test, four terminal windows were opened. One terminal runs the capture application, while the other three run sysbench or glmark2. 
+
+The first terminal ran sysbench to test file io:
+
+```
+sysbench fileio --file-total-size=10G --file-test-mark=rndrw prepare
+sysbench fileio --file-total-size=10G --file-test-mark=rndrw --threads=4 --time=150 run
+sysbench fileio --file-total-size=10G --file-test-mark=rndrw cleanup
+```
+
+The second terminal ran sysbench on memory:
+
+```
+sysbench memory --memory-block-size=1M --memory-total-size=10000G run
+```
+
+The third terminal ran glmark2:
+
+```
+glmark2
+```
+
+The following image shows all processes running and there are no errors in the capture application!
+
+<div align="center">
+  <a href="https://github.com/ddommett/RasPi_FPGA2">
+    <img src="../images/jellyfish.png" alt="CPU and GPU Test with Capture." width="543" >
+  </a>
+</div>
+
+## Final Comments
+
 Could this approach really be this "easy" and this successful. Afterall, we didn't have to write any kernel code, or research process priorities, or boot into different logins (GUI or non-GUI). We don't have to write directly to any cpu registers, or do any "bit-banging".  What initially looked like a kludgy approach to getting high speed data into a Raspberry Pi 5 has worked very well. (A resolution of 640x480 with 24 bits per pixel is a data rate of approximately 55MBps - well past the original goals!)
 
 [Back to Main Part 2](../readme.md)
