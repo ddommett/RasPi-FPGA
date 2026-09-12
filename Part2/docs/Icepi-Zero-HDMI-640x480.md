@@ -116,7 +116,13 @@ The following image shows all processes running and there are no errors in the c
 
 ## Final Comments
 
-Could this approach really be this "easy" and this successful. Afterall, we didn't have to write any kernel code, or research process priorities, or boot into different logins (GUI or non-GUI). We don't have to write directly to any cpu registers, or do any "bit-banging".  What initially looked like a kludgy approach to getting high speed data into a Raspberry Pi 5 has worked very well. (A resolution of 640x480 with 24 bits per pixel is a data rate of approximately 55MBps - well past the original goals!)
+Could this approach really be this "easy" and this successful? 
+
+Afterall, we didn't have to write any kernel code, or research process priorities, or boot into different logins (GUI or non-GUI). We don't have to write directly to any cpu registers, or do any "bit-banging".  This ran under Wayland, with a heavy CPU and GPU load, and had zero errors.
+
+What initially looked like a kludgy approach to getting high speed data into a Raspberry Pi 5 has worked very well. 
+
+A resolution of 640x480 with 24 bits per pixel is a data rate of approximately 55MBps - well past the original goals!
 
 [Back to Main Part 2](../readme.md)
 
